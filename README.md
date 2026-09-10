@@ -44,41 +44,6 @@ Prerequisites
 
     SQLite3 installed on your machine
 
-1. Clone the repository
-code Bash
-
-git clone <your-repository-url>
-cd <your-repository-folder>
-
-2. Install Dependencies
-
-Ensure you have a Gemfile with the required gems (like sinatra, sqlite3, bcrypt, rack-flash3, sinatra-activerecord), then run:
-code Bash
-
-bundle install
-
-3. Setup the Database
-
-Create a db folder in the root directory (if it doesn't exist) so the database can be generated properly:
-code Bash
-
-mkdir db
-
-Run the provided seeder file to drop/create tables and populate default data:
-code Bash
-
-ruby seeder.rb
-
-4. Run the Application
-
-Start the Sinatra server:
-code Bash
-
-ruby app.rb
-
-The app should now be running locally. Open your browser and navigate to http://localhost:4567.
-🔐 Default Credentials
-
 The database seeder provisions two default accounts for testing purposes:
 Role	Username	Password	Starting Balance
 Admin	admin	admin	1000

@@ -48,7 +48,7 @@ async function randomizer() {
 
     winDisplay.innerHTML = "";
 
-    await fetch("http://localhost:9292/stats", {
+    await fetch("/stats", {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -198,7 +198,7 @@ async function createSlices() {
         { label: "Minor", color: "blue", value:500 ,weight: 50 }
     ];
     try {
-        const response = await fetch("http://localhost:9292/jackpots", {
+        const response = await fetch("/jackpots", {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -390,7 +390,7 @@ function win() {
 }
 function UpdateBalance(bet, win_amount) {
     profits = win_amount - bet;
-    fetch("http://localhost:9292/users/update_spin", {
+    fetch("/users/update_spin", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

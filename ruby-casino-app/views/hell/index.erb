@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casino of Hell</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Casino of Hell</h1>
+        <div>
+            <button class="account-tab" onclick = "window.location.href ='/economies'" >Account</button>
+            <div class="deposit-tab" onclick="showPopup()">Deposit</div>
+            <form action="/logout" method="POST">
+                <button class="logout-tab">Logout</button>
+            </form>
+        </div>
+    </header>
+    <% if (session[:user]["admin"]==1) %>
+        <div> 
+            <h3> Change Odds </h3>
+            <form action="/stats/update" method="POST">
+                <span id = "odd1"> 5% </span>
+                <input type="range" min="0" max="300" value="50" class="slider" name="odds1" onInput = "updateSlider(this.value, 1)">
+                <span id = "odd2"> 5% </span>
+                <input type="range" min="0" max="300" value="50" class="slider" name="odds2" onInput = "updateSlider(this.value, 2)">
+                <span id = "odd3"> 5% </span>
+                <input type="range" min="0" max="300" value="50" class="slider" name="odds3" onInput = "updateSlider(this.value, 3)">
+                <span id = "odd4"> 5% </span>
+                <input type="range" min="0" max="300" value="50" class="slider" name="odds4" onInput = "updateSlider(this.value, 4)">
+                <span id = "odd5"> 5% </span>
+                <input type="range" min="0" max="300" value="50" class="slider" name="odds5" onInput = "updateSlider(this.value, 5)">
+                <span id = "odd6"> 5% </span>
+                <input type="range" min="0" max="300" value="50" class="slider" name="odds6" onInput = "updateSlider(this.value, 6)">
+                
+                <span id = "wild"> 70% </span>
+                
+                <button type="submit" id = "odds_submit">Change Odds</button>
+            </form>
+
+        </div>
+    <% end %>
+    <main>
+        <div class="slot-machine">
+            <div class="slot-container">
+                <div class="tile"><image src="img/jonkler.png"></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></div>
+                <div class="tile" class="win_tile"><image src="img/WILD_ICON.png"></div>
+                <div class="tile" class="win_tile"><image src="img/GHOST_ICON.png"></div>
+                <div class="tile" class="win_tile"><image src="img/DEMON_ICON.png"></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></div>
+            </div>
+
+            <div class="slot-container">
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile" class="win_tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile" class="win_tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile" class="win_tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+            </div>
+
+            <div class="slot-container">
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile" class="win_tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile" class="win_tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile" class="win_tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+            </div>
+
+            <div class="slot-container">
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile" class="win_tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile" class="win_tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile" class="win_tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+            </div>
+
+            <div class="slot-container">
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+                <div class="tile"><image src="img/WILD_ICON.png"></image></div>
+            </div>
+        </div>
+        <div class="wheel-container">
+            <div id = "arrow"></div>
+            <svg id="wheel" width="300" height="300" viewBox="0 0 300 300"></svg>
+        </div>
+        <div class="tabs">
+            <div class="tab">
+            <h1> Balance </h1>
+            <p id="balance"> $<%= session[:user]['balance'] %> </p>
+            </div>
+            <div class="tab">Input</div>
+            <div class="tab">
+            <h6> Win Amount: </h6>
+            <p id="win_amount"> </p> 
+            </div>
+            <div id="spin" onclick="randomizer()"> Spin </div>
+        </div>
+    </main>
+    <div class="jackpots">
+        <% @jackpots.each do |jackpot| %>
+            <div class="jackpot">
+                <h3> <%= jackpot["name"] %> </h3>
+                <p id="jackpot_amount"> $<%= jackpot["value"] %> </p>
+                <p> <%= jackpot["price"] %> </p>
+                <form action="/jackpot_users" method = "POST">
+                    <button>Play</button>
+                    <input type="hidden" name="jackpot_id" value="<%= jackpot["id"] %>">
+                </form>
+                <% if session[:user]["admin"] == 1 %>
+                    <form action="/jackpots/<%=jackpot["id"] %>/delete" method = "POST">
+                        <input type="hidden" name="jackpot_id" value="<%= jackpot["id"] %>">
+                        <button>Delete</button>
+                    </form>
+                <% end %>
+            </div>
+        <% end %>
+        <% if session[:user]["admin"] == 1 %>
+            <h3> Create Jackpot </h3>
+            <form action="/jackpots/create" method = "POST">
+                <input type="text" name="name" placeholder="Name">
+                <input type="number" name="value" placeholder="Value">
+                <input type="number" name="price" placeholder="Price">
+                <button> Create </button>
+            </form>
+        <% end %>
+    </div>
+
+    <div class="overlay" id="overlay" onclick="hidePopup()"></div>
+    <div class="popup" id="popup">
+        <h2>Deposit Money</h2>
+        <form action="/users/update" method="POST">
+            <input type="number" name="depositAmount" placeholder="Enter amount" id="depositAmount">
+            <button onclick="depositMoney()" type="submit">Deposit</button>
+        </form>
+        <button onclick="hidePopup()">Close</button>
+    </div>
+    <script src="script.js?<%= Time.now %>"></script>
+</body>
+</html>

@@ -111,21 +111,21 @@ Looking back at this project with my current background in cybersecurity and sof
 
 🛡️ Security
 
-    * Client-Side Trust (CWE-602): In `/users/update_spin`, the backend trusts the frontend payload for the `win` calculation. An attacker can intercept the HTTP request (e.g., using Burp Suite) and inject arbitrary win amounts. In a production environment, RNG evaluation, payout math, and balance updates must strictly execute server-side within isolated, database transactions.
+* Client-Side Trust (CWE-602): In `/users/update_spin`, the backend trusts the frontend payload for the `win` calculation. An attacker can intercept the HTTP request (e.g., using Burp Suite) and inject arbitrary win amounts. In a production environment, RNG evaluation, payout math, and balance updates must strictly execute server-side within isolated, database transactions.
 
-    * Input Validation & Edge Cases: The deposit endpoint (`/users/update`) lacks boundary enforcement, permitting negative amounts or extreme numbers that trigger floating-point overflows (IEEE 754 float overflow to `$Infinity`). Proper input validation should reject negative values and enforce strict numeric bounds.
+* Input Validation & Edge Cases: The deposit endpoint (`/users/update`) lacks boundary enforcement, permitting negative amounts or extreme numbers that trigger floating-point overflows (IEEE 754 float overflow to `$Infinity`). Proper input validation should reject negative values and enforce strict numeric bounds.
 
-    * Cookie-Based Rate Limiting Bypass: The brute-force protection on `/login` stores attempt counters inside the client session cookie. An attacker can simply clear their cookies between requests to reset the lock-out counter. Rate-limiting should be stored server-side (e.g., in Redis or a DB table mapped to IP/identity).
+* Cookie-Based Rate Limiting Bypass: The brute-force protection on `/login` stores attempt counters inside the client session cookie. An attacker can simply clear their cookies between requests to reset the lock-out counter. Rate-limiting should be stored server-side (e.g., in Redis or a DB table mapped to IP/identity).
 
-    * Denial of Service (ZeroDivisionError): In `/jackpots` (`weight = 1000000 / jackpot["value"]`) and `/jackpots/:id/delete`, missing zero-checks can trigger unhandled division-by-zero exceptions, returning HTTP 500 errors if values or participant counts are zero.
-    
+* Denial of Service (ZeroDivisionError): In `/jackpots` (`weight = 1000000 / jackpot["value"]`) and `/jackpots/:id/delete`, missing zero-checks can trigger unhandled division-by-zero exceptions, returning HTTP 500 errors if values or participant counts are zero.
+
 
 🧹 Code Quality & Maintainability
 
-    * Domain-Driven Naming: Ambiguous variable names in the same API scope (e.g., `jackpot_list` vs. `jackpot_array`) should be renamed semantically to reflect their domain context.
+* Domain-Driven Naming: Ambiguous variable names in the same API scope (e.g., `jackpot_list` vs. `jackpot_array`) should be renamed semantically to reflect their domain context.
 
-    * Database Optimization: Nested in-memory loops used to correlate jackpots and users  should be delegated to the database engine using SQL `JOIN` operations.
+* Database Optimization: Nested in-memory loops used to correlate jackpots and users  should be delegated to the database engine using SQL `JOIN` operations.
 
-    * Precise Error Handling: Conflated error logic (such as returning `"User not found"` when a user exists but has a balance `< 20`) should be separated into explicit 404 (Not Found) vs. 400 (Insufficient Balance) responses.
+* Precise Error Handling: Conflated error logic (such as returning `"User not found"` when a user exists but has a balance `< 20`) should be separated into explicit 404 (Not Found) vs. 400 (Insufficient Balance) responses.
 
-    * Missing Comments & Documentation: The codebase is largely uncommented. It lacks function headers/docstrings and inline explanations for complex game and jackpot logic, making it harder to read and maintain.
+* Missing Comments & Documentation: The codebase is largely uncommented. It lacks function headers/docstrings and inline explanations for complex game and jackpot logic, making it harder to read and maintain.
